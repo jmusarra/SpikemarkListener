@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+# Spikemark Listener
+# Receives and displays position information sent by Creative Conners Spikemark scenic automation software
+# Author: John Musarra
+# Copyright 2016 John Musarra all rights reserved
+
+
 import Tkinter
 import socket
 import re
