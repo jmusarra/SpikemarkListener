@@ -14,7 +14,7 @@ import re
 
 def createSpikeList():
 	spikes = {}
-	for spike in range(1,8):
+	for spike in range(1,9):
 		spikes[spike] = {}
 	# import spike information from xml showfile, manual for now
 	spikes[1]['name'], spikes[1]['position'] = "NEAR EOT", 140
@@ -22,8 +22,9 @@ def createSpikeList():
 	spikes[3]['name'], spikes[3]['position'] = "YAGO PICKUP", 180.83
 	spikes[4]['name'], spikes[4]['position'] = "LEVIS PRE", 193.56
 	spikes[5]['name'], spikes[5]['position'] = "LEVIS ONSTAGE", 503.7
-	spikes[6]['name'], spikes[6]['position'] = "YAGO ONSTAGE", 812.86
-	spikes[7]['name'], spikes[7]['position'] = "FAR EOT", 860
+	spikes[6]['name'], spikes[6]['position'] = "THUD RUMBLE", 531.48
+	spikes[7]['name'], spikes[7]['position'] = "YAGO ONSTAGE", 812.86
+	spikes[8]['name'], spikes[8]['position'] = "FAR EOT", 860
 	return spikes
 
 
@@ -70,6 +71,8 @@ lblSpike6 = Tkinter.Label(root, text=spikes[6]['name'], bg="black",  fg="white",
 lblSpike6.grid(row=7, column=2, sticky='e')
 lblSpike7 = Tkinter.Label(root, text=spikes[7]['name'], bg="black",  fg="white", font=("Consolas", 18))
 lblSpike7.grid(row=8, column=2, sticky='e')
+lblSpike8 = Tkinter.Label(root, text=spikes[8]['name'], bg="black",  fg="white", font=("Consolas", 18))
+lblSpike8.grid(row=9, column=2, sticky='e')
 
 
 def listen():              # receives Watchout feedback from Spikemark, parse into machine name and position data
@@ -90,6 +93,8 @@ def allLabelsWhite():                          # TODO: pull label names from ite
 	lblSpike5.configure(fg="white")
 	lblSpike6.configure(fg="white")
 	lblSpike7.configure(fg="white")
+	lblSpike8.configure(fg="white")
+
 
 
 def indicateProximity():       # changes color of spike text labels based on current position
@@ -104,10 +109,12 @@ def indicateProximity():       # changes color of spike text labels based on cur
 		lblSpike4.configure(fg="green") # Levi's Pre - 193.56
 	elif 502.7 <= p <= 504.7:
 		lblSpike5.configure(fg="green") # Levi's onstage - 503.7"
+	elif 530.48 <= p <= 532.48:
+		lblSpike6.configure(fg="green") # Thud Rumble- 531.48"	
 	elif 811.86 <= p <= 813.16:
-		lblSpike6.configure(fg="green") # Yago onstage - 812.86"
+		lblSpike7.configure(fg="green") # Yago onstage - 812.86"
 	elif p > 860:
-		lblSpike7.configure(fg="red")   # far end of travel - greater than 860"
+		lblSpike8.configure(fg="red")   # far end of travel - greater than 860"
 	else:
 		allLabelsWhite()	
 	root.after(250, indicateProximity)	
