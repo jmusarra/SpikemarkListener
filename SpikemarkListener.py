@@ -3,7 +3,9 @@
 # Spikemark Listener
 # Receives and displays position information sent by Creative Conners Spikemark scenic automation software
 # Author: John Musarra
-# Copyright 2016 John Musarra all rights reserved
+# Copyright 2016 John Musarra
+
+# TODO: Add multicast listening
 
 
 import Tkinter
@@ -16,7 +18,7 @@ def createSpikeList():
 	spike1name, spike1value = "NEAR EOT", 140
 	spike2name, spike2value = "LEVIS PICKUP", 142.65
 	spike3name, spike3value = "YAGO PICKUP", 180.83
-	spike4name, spike4value = "LEVIS PRE", 208.18
+	spike4name, spike4value = "LEVIS PRE", 193.56
 	spike5name, spike5value = "LEVIS ONSTAGE", 503.7
 	spike6name, spike6value = "YAGO ONSTAGE", 812.86
 	spike7name, spike7value = "FAR EOT", 860
@@ -63,6 +65,8 @@ machineName=Tkinter.StringVar()
 pos = Tkinter.StringVar()
 machineName.set("waiting for data...")
 pos.set("Waiting for data....")
+
+
 lblPosCounter = Tkinter.Label(root, textvariable=pos, image=bgImage, compound="center", height="90", width="400", fg="white", padx=20, font=("Consolas", 120))
 lblPosCounter.grid(row=4, column=1, rowspan=5)
 lblMachineName = Tkinter.Label(root, textvariable=machineName, bg="#2d2d2d",  fg="white", font=("Consolas", 24))
@@ -83,8 +87,8 @@ lblSpike7 = Tkinter.Label(root, text=spikes[7]['name'], bg="black",  fg="white",
 lblSpike7.grid(row=8, column=2, sticky='e')
 
 
-def listen():          #receive Watchout feedback from Spikemark, parse into machine name and position data
-	global position
+def listen():              # receives Watchout feedback from Spikemark, parse into machine name and position data
+	global position        # TODO: add error handling if no connection
 	global machineName
 	spikemarkData, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
 	dataSplit = re.split('"', spikemarkData)
@@ -103,7 +107,7 @@ def allLabelsWhite():                          # TODO: pull label names from ite
 	lblSpike7.configure(fg="white")
 
 
-def indicateProximity():       # change color of spike text labels based on current position
+def indicateProximity():       # changes color of spike text labels based on current position
 	p=float(position)          # TODO: take position range from spikes[].position values +1 and -1 inch
 	if p <= 130:
 		lblSpike1.configure(fg="red")   # near end of travel - less than 150"
@@ -111,10 +115,10 @@ def indicateProximity():       # change color of spike text labels based on curr
 		lblSpike2.configure(fg="green") # Levis pickup - 142.65"
 	elif 179.91 <= p <= 181.91:
 		lblSpike3.configure(fg="green") # Yago pickup - 180.91"
-	elif 207.18 <= p <= 209.18:
-		lblSpike4.configure(fg="green") # Levi's Pre - 208.18
+	elif 192.56 <= p <= 194.56:
+		lblSpike4.configure(fg="green") # Levi's Pre - 193.56
 	elif 502.7 <= p <= 504.7:
-		lblSpike6.configure(fg="green") # Levi's onstage - 503.7"
+		lblSpike5.configure(fg="green") # Levi's onstage - 503.7"
 	elif 811.86 <= p <= 813.16:
 		lblSpike6.configure(fg="green") # Yago onstage - 812.86"
 	elif p > 860:
