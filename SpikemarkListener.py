@@ -14,30 +14,16 @@ import re
 
 def createSpikeList():
 	spikes = {}
-	# import spike information from xml showfile, manual for now
-	spike1name, spike1value = "NEAR EOT", 140
-	spike2name, spike2value = "LEVIS PICKUP", 142.65
-	spike3name, spike3value = "YAGO PICKUP", 180.83
-	spike4name, spike4value = "LEVIS PRE", 193.56
-	spike5name, spike5value = "LEVIS ONSTAGE", 503.7
-	spike6name, spike6value = "YAGO ONSTAGE", 812.86
-	spike7name, spike7value = "FAR EOT", 860
 	for spike in range(1,8):
 		spikes[spike] = {}
-	spikes[1]['name'] = spike1name
-	spikes[1]['position'] = spike1value
-	spikes[2]['name'] = spike2name
-	spikes[2]['position'] = spike2value
-	spikes[3]['name'] = spike3name
-	spikes[3]['position'] = spike3value
-	spikes[4]['name'] = spike4name
-	spikes[4]['position'] = spike4value
-	spikes[5]['name'] = spike5name
-	spikes[5]['position'] = spike5value
-	spikes[6]['name'] = spike6name
-	spikes[6]['position'] = spike6value
-	spikes[7]['name'] = spike7name
-	spikes[7]['position'] = spike7value
+	# import spike information from xml showfile, manual for now
+	spikes[1]['name'], spikes[1]['position'] = "NEAR EOT", 140
+	spikes[2]['name'], spikes[2]['position'] = "LEVIS PICKUP", 142.65
+	spikes[3]['name'], spikes[3]['position'] = "YAGO PICKUP", 180.83
+	spikes[4]['name'], spikes[4]['position'] = "LEVIS PRE", 193.56
+	spikes[5]['name'], spikes[5]['position'] = "LEVIS ONSTAGE", 503.7
+	spikes[6]['name'], spikes[6]['position'] = "YAGO ONSTAGE", 812.86
+	spikes[7]['name'], spikes[7]['position'] = "FAR EOT", 860
 	return spikes
 
 
@@ -46,8 +32,7 @@ position = 0
 UDP_IP = "0.0.0.0"
 UDP_PORT = 3040
     
-sock = socket.socket(socket.AF_INET, # Internet
-                         socket.SOCK_DGRAM) # UDP
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
 
 
