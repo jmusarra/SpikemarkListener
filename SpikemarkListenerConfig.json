@@ -1,0 +1,20 @@
+{
+	"spikes": {
+		"NEAR EOT": 		"100",
+		"LEVIS PICKUP":		"150",
+		"YAGO PICKUP":		"160",
+		"LEVIS PRE":		"190",
+		"LEVIS ONSTAGE":	"505",
+		"YAGO ONSTAGE":		"830",
+		"FAR EOT":			"860"
+
+	},
+
+	"network": {
+		"ip":		"0.0.0.0",
+		"port":		"3040"
+
+	}
+
+
+}
