@@ -36,7 +36,7 @@ UDP_PORT = 3040
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
 
-
+# TODO_ move UI into separate module
 root = Tkinter.Tk()
 root.title("Spikemark Listener")
 root.geometry("600x225+450+100")
@@ -99,7 +99,7 @@ def allLabelsWhite():                          # TODO: pull label names from ite
 
 def indicateProximity():       # changes color of spike text labels based on current position
 	p=float(position)          # TODO: take position range from spikes[].position values +1 and -1 inch
-	if p <= 130:
+	if p <= 130:			 
 		lblSpike1.configure(fg="red")   # near end of travel - less than 150"
 	elif 141.65 <= p <= 143.65:
 		lblSpike2.configure(fg="green") # Levis pickup - 142.65"
